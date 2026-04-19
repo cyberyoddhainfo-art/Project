@@ -1,0 +1,362 @@
+/* ── Employee Pulse Card Styles ── */
+
+.pulse-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(249,250,251,0.9));
+    border-radius: 1rem;
+    border: 1px solid rgba(229,231,235,0.8);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.pulse-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+}
+
+.pulse-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.pulse-card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.pulse-card-header .pulse-subtitle {
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+/* ── Pulse Dot (animated indicator) ── */
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.pulse-dot--normal {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16,185,129,0.4);
+}
+
+.pulse-dot--amber {
+    background: #f59e0b;
+    animation: pulse-amber 2s ease-in-out infinite;
+}
+
+.pulse-dot--red {
+    background: #ef4444;
+    animation: pulse-red 1.5s ease-in-out infinite;
+}
+
+/* Inline dot for tables (smaller) */
+.pulse-dot--sm {
+    width: 8px;
+    height: 8px;
+}
+
+@keyframes pulse-amber {
+    0%, 100% {
+        box-shadow: 0 0 4px rgba(245,158,11,0.3);
+    }
+    50% {
+        box-shadow: 0 0 14px rgba(245,158,11,0.7), 0 0 24px rgba(245,158,11,0.3);
+    }
+}
+
+@keyframes pulse-red {
+    0%, 100% {
+        box-shadow: 0 0 4px rgba(239,68,68,0.4);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(239,68,68,0.8), 0 0 28px rgba(239,68,68,0.3);
+    }
+}
+
+/* ── Risk Level Badge ── */
+
+.risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.risk-badge--normal {
+    background: rgba(16,185,129,0.1);
+    color: #059669;
+}
+
+.risk-badge--amber {
+    background: rgba(245,158,11,0.1);
+    color: #d97706;
+}
+
+.risk-badge--red {
+    background: rgba(239,68,68,0.1);
+    color: #dc2626;
+}
+
+/* ── Recommendation Banner ── */
+
+.pulse-recommendation {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.pulse-recommendation--normal {
+    background: rgba(16,185,129,0.06);
+    border: 1px solid rgba(16,185,129,0.15);
+    color: #065f46;
+}
+
+.pulse-recommendation--amber {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.2);
+    color: #92400e;
+}
+
+.pulse-recommendation--red {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #991b1b;
+}
+
+/* ── Flag Detail Cards ── */
+
+.pulse-flags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.pulse-flag {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(229,231,235,0.6);
+    border-radius: 0.75rem;
+    transition: background 0.2s;
+}
+
+.pulse-flag:hover {
+    background: rgba(255,255,255,1);
+}
+
+.pulse-flag-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.pulse-flag-content h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.25rem;
+}
+
+.pulse-flag-content p {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.pulse-flag-stat {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.pulse-flag-stat span {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.pulse-flag-stat strong {
+    color: #374151;
+}
+
+/* ── Skeleton Loading ── */
+
+.pulse-skeleton {
+    height: 120px;
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ── Dashboard Alert Panel ── */
+
+.attrition-alerts-panel {
+    background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(249,250,251,0.95));
+    border-radius: 1rem;
+    border: 1px solid rgba(229,231,235,0.8);
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+}
+
+.attrition-alerts-panel h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.attrition-alert-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(229,231,235,0.5);
+    margin-bottom: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.attrition-alert-row:hover {
+    background: rgba(255,255,255,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.attrition-alert-row:last-child {
+    margin-bottom: 0;
+}
+
+.attrition-alert-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.attrition-alert-info .name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.attrition-alert-info .dept {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.attrition-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+/* ── Pulse Dot Tooltip (hover to show risk reason) ── */
+
+.pulse-dot-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pulse-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    max-width: 320px;
+    padding: 0.75rem 1rem;
+    border-radius: 0.625rem;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    z-index: 100;
+    flex-direction: column;
+    gap: 0.375rem;
+    pointer-events: none;
+}
+
+.pulse-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #fff;
+}
+
+.pulse-tooltip--amber {
+    border-left: 3px solid #f59e0b;
+}
+
+.pulse-tooltip--red {
+    border-left: 3px solid #ef4444;
+}
+
+.pulse-dot-wrapper:hover .pulse-tooltip {
+    display: flex;
+}
+
+.pulse-tooltip-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6b7280;
+    margin-bottom: 0.125rem;
+}
+
+.pulse-tooltip--amber .pulse-tooltip-title {
+    color: #d97706;
+}
+
+.pulse-tooltip--red .pulse-tooltip-title {
+    color: #dc2626;
+}
+
+.pulse-tooltip-flag {
+    font-size: 0.78rem;
+    color: #374151;
+    line-height: 1.4;
+    display: block;
+}
+

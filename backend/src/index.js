@@ -13,12 +13,14 @@ const employeeRoutes = require('./routes/employees');
 const attendanceRoutes = require('./routes/attendance');
 const leaveRoutes = require('./routes/leaves');
 const payrollRoutes = require('./routes/payroll');
+const attritionRoutes = require('./routes/attrition');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/leaves', leaveRoutes);
 app.use('/api/payroll', payrollRoutes);
+app.use('/api/attrition', attritionRoutes);
 
 // Add healthcheck
 app.get('/health', (req, res) => res.json({ status: 'ok' }));

@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import api from '../services/api';
 import useAuthStore from '../contexts/AuthContext';
 import { Plus, Search } from 'lucide-react';
+import EmployeePulse, { PulseDot } from '../components/EmployeePulse';
 
 const Employees = ({ isSelfView }) => {
     const { user } = useAuthStore();
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [pulseMap, setPulseMap] = useState({});
 
     // Modal state for adding/editing employee
     const [showModal, setShowModal] = useState(false);
@@ -27,6 +29,17 @@ const Employees = ({ isSelfView }) => {
             } else {
                 const res = await api.get('/employees');
                 setEmployees(res.data.data);
+
+                // Fetch bulk pulse data for table indicators
+                try {
+                    const pulseRes = await api.get('/attrition/pulse');
+                    const flagged = pulseRes.data.data?.flagged || [];
+                    const map = {};
+                    flagged.forEach(f => { map[f.employee_id] = { risk_level: f.risk_level, flags: f.flags || [] }; });
+                    setPulseMap(map);
+                } catch(pe) {
+                    console.error('Pulse fetch failed:', pe);
+                }
             }
         } catch(e) {
             console.error(e);
@@ -113,7 +126,15 @@ const Employees = ({ isSelfView }) => {
                             ) : employees.map((emp) => (
                                 <tr key={emp.id} className="hover:bg-gray-50 transition">
                                     <td className="px-6 py-4 font-medium text-gray-900">{emp.employee_id}</td>
-                                    <td className="px-6 py-4 text-gray-700">{emp.full_name}</td>
+                                    <td className="px-6 py-4 text-gray-700">
+                                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            {emp.full_name}
+                                            <PulseDot
+                                                riskLevel={pulseMap[emp.employee_id]?.risk_level}
+                                                flags={pulseMap[emp.employee_id]?.flags}
+                                            />
+                                        </span>
+                                    </td>
                                     <td className="px-6 py-4 text-gray-700">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             {emp.department}
@@ -132,6 +153,11 @@ const Employees = ({ isSelfView }) => {
                     </table>
                 </div>
             </div>
+
+            {/* Pulse card for self-view */}
+            {isSelfView && employees.length > 0 && (
+                <EmployeePulse employeeId={employees[0].employee_id} />
+            )}
 
             {/* Add / Edit Employee Modal */}
             {showModal && (

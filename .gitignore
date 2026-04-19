@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Added by code-review-graph
+.code-review-graph/
